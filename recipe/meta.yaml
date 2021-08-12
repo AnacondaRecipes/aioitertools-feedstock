@@ -28,6 +28,10 @@ test:
   imports:
     - aioitertools
     - aioitertools.tests
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/jreese/aioitertools
