@@ -19,7 +19,6 @@ requirements:
     - pip
     - python
     - flit-core >=3.8,<4
-    - typing_extensions >=4.0  # [py<310]
   run:
     - python
     - typing_extensions >=4.0  # [py<310]
@@ -27,7 +26,9 @@ requirements:
 test:
   imports:
     - aioitertools
-    - aioitertools.tests
+    - aioitertools.asyncio
+    - aioitertools.helpers
+    - aioitertools.more_itertools
   requires:
     - pip
   commands:
@@ -35,7 +36,7 @@ test:
 
 
 about:
-  home: https://aioitertools.omnilib.dev/en/stable
+  home: https://aioitertools.omnilib.dev
   license: MIT
   license_family: MIT
   license_file: LICENSE
@@ -43,7 +44,7 @@ about:
   description: |
     Implementation of itertools, builtins, and more for AsyncIO and mixed-type
     iterables.
-  doc_url: https://aioitertools.omnilib.dev/en/stable
+  doc_url: https://aioitertools.omnilib.dev
   dev_url: https://github.com/jreese/aioitertools
 
 extra:
