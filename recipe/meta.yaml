@@ -31,7 +31,8 @@ test:
     - aioitertools.more_itertools
   commands:
     - pip check
-    - pytest -v ${SP_DIR}/aioitertools/tests/asyncio.py ${SP_DIR}/aioitertools/tests/builtins.py ${SP_DIR}/aioitertools/tests/helpers.py ${SP_DIR}/aioitertools/tests/itertools.py ${SP_DIR}/aioitertools/tests/more_itertools.py
+    - pytest -v ${SP_DIR}/aioitertools/tests/asyncio.py ${SP_DIR}/aioitertools/tests/builtins.py ${SP_DIR}/aioitertools/tests/helpers.py ${SP_DIR}/aioitertools/tests/itertools.py ${SP_DIR}/aioitertools/tests/more_itertools.py  # [unix]
+    - pytest -v %SP_DIR%/aioitertools/tests/asyncio.py %SP_DIR%/aioitertools/tests/builtins.py %SP_DIR%/aioitertools/tests/helpers.py %SP_DIR%/aioitertools/tests/itertools.py %SP_DIR%/aioitertools/tests/more_itertools.py  # [win]
   requires:
     - pip
     - pytest
