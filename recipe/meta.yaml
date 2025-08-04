@@ -11,8 +11,8 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<38]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<38]
 
 requirements:
   host:
@@ -24,24 +24,17 @@ requirements:
     - typing_extensions >=4.0  # [py<310]
 
 test:
-  source_files:
-    - aioitertools/tests
   imports:
     - aioitertools
     - aioitertools.asyncio
     - aioitertools.helpers
     - aioitertools.more_itertools
+  commands:
+    - pip check
+    - pytest -v ${SP_DIR}/aioitertools/tests/asyncio.py ${SP_DIR}/aioitertools/tests/builtins.py ${SP_DIR}/aioitertools/tests/helpers.py ${SP_DIR}/aioitertools/tests/itertools.py ${SP_DIR}/aioitertools/tests/more_itertools.py
   requires:
     - pip
     - pytest
-  commands:
-    - pip check
-    - cd aioitertools/tests
-    - pytest asyncio.py
-    - pytest builtins.py
-    - pytest helpers.py
-    - pytest itertools.py
-    - pytest more_itertools.py
 
 about:
   home: https://aioitertools.omnilib.dev
