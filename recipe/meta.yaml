@@ -24,6 +24,8 @@ requirements:
     - typing_extensions >=4.0  # [py<310]
 
 test:
+  source_files:
+    - aioitertools/tests
   imports:
     - aioitertools
     - aioitertools.asyncio
@@ -31,9 +33,15 @@ test:
     - aioitertools.more_itertools
   requires:
     - pip
+    - pytest
   commands:
     - pip check
-
+    - cd aioitertools/tests
+    - pytest asyncio.py
+    - pytest builtins.py
+    - pytest helpers.py
+    - pytest itertools.py
+    - pytest more_itertools.py
 
 about:
   home: https://aioitertools.omnilib.dev
