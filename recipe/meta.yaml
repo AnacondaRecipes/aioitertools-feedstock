@@ -1,5 +1,5 @@
 {% set name = "aioitertools" %}
-{% set version = "0.7.1" %}
+{% set version = "0.12.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,30 +7,38 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 54a56c7cf3b5290d1cb5e8974353c9f52c677612b5d69a859369a020c53414a3
+  sha256: c2a9055b4fbb7705f561b9d86053e8af5d10cc845d22c32008c43490b2d8dd6b
 
 build:
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<38]
 
 requirements:
   host:
     - pip
-    - python >=3.6
-    - flit-core >=2,<4
-    - typing_extensions >=3.7
+    - python
+    - flit-core >=3.8,<4
   run:
-    - python >=3.6
-    - typing_extensions >=3.7
+    - python
+    - typing_extensions >=4.0  # [py<310]
 
 test:
   imports:
     - aioitertools
-    - aioitertools.tests
+    - aioitertools.asyncio
+    - aioitertools.helpers
+    - aioitertools.more_itertools
+  commands:
+    - pip check
+    - pytest -v ${SP_DIR}/aioitertools/tests/asyncio.py ${SP_DIR}/aioitertools/tests/builtins.py ${SP_DIR}/aioitertools/tests/helpers.py ${SP_DIR}/aioitertools/tests/itertools.py ${SP_DIR}/aioitertools/tests/more_itertools.py  # [unix]
+    - pytest -v %SP_DIR%/aioitertools/tests/asyncio.py %SP_DIR%/aioitertools/tests/builtins.py %SP_DIR%/aioitertools/tests/helpers.py %SP_DIR%/aioitertools/tests/itertools.py %SP_DIR%/aioitertools/tests/more_itertools.py  # [win]
+  requires:
+    - pip
+    - pytest
 
 about:
-  home: https://github.com/jreese/aioitertools
+  home: https://aioitertools.omnilib.dev
   license: MIT
   license_family: MIT
   license_file: LICENSE
@@ -38,7 +46,7 @@ about:
   description: |
     Implementation of itertools, builtins, and more for AsyncIO and mixed-type
     iterables.
-  doc_url: https://github.com/jreese/aioitertools
+  doc_url: https://aioitertools.omnilib.dev
   dev_url: https://github.com/jreese/aioitertools
 
 extra:
